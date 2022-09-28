@@ -1,0 +1,42 @@
+.color-blue {
+    color: var(--blue);
+}
+.color-red {
+    color: var(--red);
+}
+.color-greyDarken-1 {
+    color: var(--greyDarken-1);
+}
+.color-greyLite-1 {
+    color: var(--greyLite-1);
+}
+.color-greyLite-2 {
+    color: var(--greyLite-2);
+}
+
+
+.bg-blue {
+    background: var(--blue);
+}
+.bg-red {
+    background: var(--red);
+}
+.bg-greyDarken-1 {
+    background: var(--greyDarken-1);
+}
+.bg-greyLite-1 {
+    background: var(--greyLite-1);
+}
+.bg-greyLite-2 {
+    background: var(--greyLite-2);
+}
+.bg-color-light-blue-2 {
+    background-color: var(--color-light-blue-2);
+}
+.bg-color-grey-light-2 {
+    background: var(--color-grey-light-2);
+}
+
+.bg-color-light-grey {
+    background: var(--color-light-grey);
+}
