@@ -37,6 +37,7 @@ const Login = ({ onSubmit, initialRoute }) => {
     <PageContainer className="w-full bg-color-light-blue-2">
       <ContentContainer>
         <FormContainer>
+          <img src="../dipp-logo-blue-min.png" alt="" className="mx-auto pb-5"/>
           <Form
             name="basic"
             layout="vertical"

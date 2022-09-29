@@ -1,22 +1,19 @@
-import React, {useState} from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import React, {useState, useCallback} from 'react';
+import { Button, Form, Input, Modal } from 'antd';
 import {PageContainer, ContentContainer, FormContainer} from "../Login/styles"
 import {useNavigate} from "react-router-dom";
 
 const Registration = ({ onSubmit, initialRoute }) => {
-  const [data, setData] = useState({email: "test@test", password: "test"})
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
-  const onFinish = async ({username, password, last_name, name, patronymic, email, repeat_password}) => {
+  const onFinish = async ({username, last_name, name, patronymic, email}) => {
     try {
-      if (password === repeat_password) {
-          // делается запрос на по
-        setLoading(true)
-        navigate("/login")
-      } else {
-        console.log("выводим ошибку что пароли не равны")
-      }
+      setLoading(true)
+      setOpen(true)
+      setTimeout(navigate("/login"), 2000);
+      // вывести модальное окно с: Ваш запрос успешно отправлен
     } catch (e) {
       console.log("login error", e)
     } finally {
@@ -29,8 +26,20 @@ const Registration = ({ onSubmit, initialRoute }) => {
   };
   return (
     <PageContainer className="w-full bg-color-light-blue-2">
+      <Modal
+        title=""
+        centered
+        open={open}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
+        cancelText="Закрыть"
+        cancelButtonProps={{ style: { display: 'none' } }}
+      >
+        <h2>Ваш запрос успешно отправлен</h2>
+      </Modal>
       <ContentContainer>
         <FormContainer>
+          <img src="../dipp-logo-blue-min.png" alt="" className="mx-auto pb-5"/>
           <Form
             name="basic"
             layout="vertical"
@@ -65,7 +74,16 @@ const Registration = ({ onSubmit, initialRoute }) => {
             <Form.Item
               label="Почта"
               name="email"
-              rules={[{ required: true, message: 'Введите данные!' }]}
+              rules={[
+                {
+                  type: 'email',
+                  message: 'Введите email!',
+                },
+                {
+                  required: true,
+                  message: 'Введите email!',
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -73,21 +91,38 @@ const Registration = ({ onSubmit, initialRoute }) => {
             <Form.Item
               label="Пароль"
               name="password"
-              rules={[{ required: true, message: 'Введите данные!' }]}
+              rules={[{ required: true, message: 'Введите пароль!' }]}
+              hasFeedback
             >
               <Input.Password />
             </Form.Item>
             <Form.Item
               label="Повторите пароль"
-              name="repeat_password"
-              rules={[{ required: true, message: 'Введите данные!' }]}
+              name="confirm"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Введите пароль!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+
+                    return Promise.reject(new Error('Два введенных вами пароля не совпадают'));
+                  },
+                }),
+              ]}
             >
               <Input.Password />
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: 1, span: 1 }}>
               <Button type="primary" htmlType="submit">
-                Зарегистрироваться
+                Отправить запрос на регистрацию
               </Button>
             </Form.Item>
           </Form>

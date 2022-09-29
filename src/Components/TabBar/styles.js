@@ -1,7 +1,7 @@
 import styled, {css} from "styled-components"
 
 export const TabBarContainer = styled.div`
-  height: 40px;
+  height: 60px;
   box-shadow: 0 4px 11px rgba(0, 0, 0, 0.1);
 `
 export const TabButton = styled.button`

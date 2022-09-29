@@ -7,8 +7,6 @@ import {TOKEN_KEY, tokenAtom} from "./Store/userObject";
 import {useWatch} from "./Utils/Hooks/useWatch"
 import Tab from "./Page/Tab";
 import Main from "./Page/Main";
-import CreateAnalysis from "./Page/CreateAnalysis";
-import AnalysisItem from "./Page/Analysis/item";
 import Registration from "./Page/Registration";
 import ListСompanies from "./Page/ListСompanies";
 import PageCompanie from "./Page/PageCompanie";
@@ -55,14 +53,6 @@ function App() {
         <Route
           path="/tab/company"
           element={<PageCompanie />}
-        />
-        <Route
-          path="/tab/new_analysis"
-          element={<CreateAnalysis />}
-        />
-        <Route
-          path="/tab/analysis"
-          element={<AnalysisItem />}
         />
 
       </Routes>

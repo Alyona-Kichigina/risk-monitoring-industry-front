@@ -1,7 +1,6 @@
 import React from 'react';
 import TabBar from "../../Components/TabBar"
 import Main from "../Main";
-import CreateAnalysis from "../CreateAnalysis";
 import {Route, Routes, useNavigate} from "react-router-dom";
 
 const Tab = () => {
@@ -10,10 +9,10 @@ const Tab = () => {
     <>
       <TabBar/>
       <Routes>
-        <Route
-          path="/new_analysis/*"
-          element={<CreateAnalysis to="/new_analysis"/>}
-        />
+        {/*<Route*/}
+        {/*  path="/new_analysis/*"*/}
+        {/*  element={<CreateAnalysis to="/new_analysis"/>}*/}
+        {/*/>*/}
         <Route
           path="/main"
           element={<Main to="/main"/>}
